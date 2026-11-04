@@ -2,36 +2,56 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gemiva Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gemiva Oud-Ade Dashboard</title>
 
 <style>
-body{
+
+*{
 margin:0;
-font-family:Arial,sans-serif;
-background:#0b4d87;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Segoe UI, Arial, sans-serif;
+background:#0d4f8b;
 color:white;
+min-height:100vh;
 }
 
 header{
-background:#082f52;
-padding:15px;
-display:flex;
-justify-content:space-between;
+background:#073154;
+padding:15px 25px;
+display:grid;
+grid-template-columns:350px 1fr 250px;
 align-items:center;
 }
 
 .logo{
-height:70px;
+max-height:95px;
+max-width:340px;
+object-fit:contain;
 }
 
 #clock{
-font-size:60px;
+font-size:72px;
 font-weight:bold;
 }
 
 #date{
-font-size:20px;
+font-size:24px;
+margin-top:5px;
+}
+
+.location{
+text-align:right;
+font-size:16px;
+}
+
+.location h2{
+font-size:28px;
 }
 
 .grid{
@@ -43,26 +63,50 @@ padding:15px;
 
 .card{
 background:rgba(255,255,255,.12);
-padding:15px;
-border-radius:15px;
+border-radius:18px;
+padding:20px;
 }
 
 .card h2{
-margin-top:0;
+margin-bottom:15px;
+font-size:32px;
 }
 
-button{
-background:#ff6600;
-color:white;
+.news-item{
+font-size:24px;
+padding:10px 0;
+border-bottom:1px solid rgba(255,255,255,.2);
+}
+
+.weather-temp{
+font-size:72px;
+font-weight:bold;
+}
+
+.weather-info{
+font-size:24px;
+line-height:1.8;
+}
+
+.radio-buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:10px;
+}
+
+.radio-buttons button{
+padding:12px;
+font-size:20px;
 border:none;
-padding:10px;
-margin:3px;
-border-radius:8px;
+border-radius:10px;
+background:#ff6d00;
+color:white;
 cursor:pointer;
 }
 
-button:hover{
-background:#ff8844;
+.radio-buttons button:hover{
+background:#ff8933;
 }
 
 audio{
@@ -72,13 +116,25 @@ margin-top:10px;
 
 .footer{
 text-align:center;
-padding:10px;
+padding:20px;
 }
 
 .footer img{
-height:70px;
-max-width:90%;
+max-width:900px;
+width:75%;
+height:auto;
 }
+
+.live-indicator{
+display:inline-block;
+background:#d62d20;
+padding:4px 10px;
+border-radius:20px;
+font-size:14px;
+font-weight:bold;
+margin-left:10px;
+}
+
 </style>
 </head>
 
@@ -86,16 +142,18 @@ max-width:90%;
 
 <header>
 
+<div>
 <img src="Gemiva logo.jpg" class="logo">
+</div>
 
 <div style="text-align:center;">
 <div id="clock"></div>
 <div id="date"></div>
 </div>
 
-<div style="text-align:right;">
-<b>Gemiva Dashboard</b><br>
-Oud-Ade
+<div class="location">
+<h2>🏠 GEMIVA OUD-ADE</h2>
+Samen maken we het verschil
 </div>
 
 </header>
@@ -105,37 +163,67 @@ Oud-Ade
 <div>
 
 <div class="card">
-<h2>📰 Nieuws</h2>
-<ul>
-<li>NOS.nl voor actuele headlines</li>
-<li>Controleer intranet voor Gemiva-info</li>
-<li>Dashboard online ✅</li>
-<li>Later kunnen live nieuwsfeeds toegevoegd worden</li>
-</ul>
+
+<h2>
+📰 Nieuws
+<span class="live-indicator">LIVE</span>
+</h2>
+
+<div id="news">
+<div class="news-item">
+Welkom op het Gemiva Oud-Ade Dashboard
+</div>
+<div class="news-item">
+Nieuwsfeed wordt geladen...
+</div>
+<div class="news-item">
+Controleer belangrijke actualiteiten voor vertrek
+</div>
+</div>
+
 </div>
 
 <br>
 
 <div class="card">
-<h2>🚗 Verkeer</h2>
 
-<p>Belangrijke routes:</p>
+<h2>🚗 Verkeer & Reizen</h2>
 
-<ul>
-<li>A4 richting Den Haag</li>
-<li>A4 richting Rotterdam</li>
-<li>A44 richting Wassenaar</li>
-<li>N11 richting Alphen aan den Rijn</li>
-<li>N207</li>
-<li>Leiden Centrum</li>
-<li>'s‑Gravenzande</li>
-</ul>
+<div style="font-size:24px;line-height:1.8;">
 
-<p>
-Bekijk actuele files via:
+✅ A4 richting Den Haag
+
 <br>
-https://www.anwb.nl/verkeer
-</p>
+
+✅ A4 richting Rotterdam
+
+<br>
+
+✅ A44 richting Wassenaar
+
+<br>
+
+✅ N11 richting Alphen aan den Rijn
+
+<br>
+
+✅ N207
+
+<br>
+
+✅ Leiden Centrum
+
+<br>
+
+✅ Route naar 's‑Gravenzande
+
+<br><br>
+
+📍 Controleer voor vertrek:
+<br>
+ANWB Verkeer of Google Maps
+
+</div>
 
 </div>
 
@@ -145,11 +233,18 @@ https://www.anwb.nl/verkeer
 
 <div class="card">
 
-<h2>🌦️ Weer</h2>
+<h2>🌦️ Weer Oud-Ade</h2>
 
 <div id="weather">
-Oud-Ade<br>
-Controleer Buienradar voor actuele gegevens.
+
+<div class="weather-temp">
+--
+</div>
+
+<div class="weather-info">
+Weergegevens laden...
+</div>
+
 </div>
 
 </div>
@@ -160,6 +255,8 @@ Controleer Buienradar voor actuele gegevens.
 
 <h2>📻 Radio</h2>
 
+<div class="radio-buttons">
+
 <button onclick="radio('https://icecast.omroep.nl/radio2-bb-mp3')">
 Radio 2
 </button>
@@ -168,10 +265,20 @@ Radio 2
 Radio 5
 </button>
 
+<button onclick="window.open('https://joe.nl')">
+JOE
+</button>
+
+<button onclick="window.open('https://qmusic.nl')">
+Qmusic
+</button>
+
+</div>
+
 <audio id="player" controls></audio>
 
-<p>
-JOE volgt zodra we een stabiele stream hebben gevonden.
+<p style="margin-top:10px;">
+🎵 Radio via browser
 </p>
 
 </div>
@@ -188,21 +295,18 @@ JOE volgt zodra we een stabiele stream hebben gevonden.
 
 function updateClock(){
 
-let now=new Date();
+const now = new Date();
 
-document.getElementById("clock").innerHTML=
+document.getElementById("clock").innerHTML =
 now.toLocaleTimeString("nl-NL");
 
-document.getElementById("date").innerHTML=
-now.toLocaleDateString(
-"nl-NL",
-{
+document.getElementById("date").innerHTML =
+now.toLocaleDateString("nl-NL",{
 weekday:"long",
 day:"numeric",
 month:"long",
 year:"numeric"
-}
-);
+});
 
 }
 
@@ -211,13 +315,72 @@ updateClock();
 
 function radio(url){
 
-let p=document.getElementById("player");
+const player =
+document.getElementById("player");
 
-p.src=url;
+player.src = url;
 
-p.play();
+player.play();
 
 }
+
+radio('https://icecast.omroep.nl/radio2-bb-mp3');
+
+const headlines = [
+
+"Controleer verkeer voor vertrek naar Leiden of Den Haag",
+
+"Welkom bij Gemiva Oud-Ade",
+
+"Controleer agenda en rapportages bij dienststart",
+
+"Radio en dashboard actief",
+
+"Samen maken we het verschil 🧡"
+
+];
+
+let index = 0;
+
+setInterval(() => {
+
+document.getElementById("news").innerHTML =
+'<div class="news-item">' +
+headlines[index] +
+'</div>';
+
+index++;
+
+if(index >= headlines.length){
+index = 0;
+}
+
+},5000);
+
+fetch("https://wttr.in/Oud-Ade?format=j1")
+.then(r => r.json())
+.then(data => {
+
+const temp =
+data.current_condition[0].temp_C;
+
+const desc =
+data.current_condition[0].weatherDesc[0].value;
+
+document.getElementById("weather").innerHTML =
+'<div class="weather-temp">' +
+temp +
+'°C</div><div class="weather-info">' +
+desc +
+'<br>Locatie: Oud-Ade</div>';
+
+})
+.catch(() => {
+
+document.getElementById("weather").innerHTML =
+'<div class="weather-info">Weerinformatie tijdelijk niet beschikbaar</div>';
+
+});
 
 </script>
 
