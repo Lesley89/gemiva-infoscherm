@@ -19,39 +19,44 @@ font-family:Segoe UI, Arial, sans-serif;
 background:#0d4f8b;
 color:white;
 min-height:100vh;
+overflow:hidden;
 }
 
 header{
 background:#073154;
 padding:15px 25px;
 display:grid;
-grid-template-columns:350px 1fr 250px;
+grid-template-columns:420px 1fr 320px;
 align-items:center;
 }
 
 .logo{
-max-height:95px;
-max-width:340px;
-object-fit:contain;
+max-height:130px;
+max-width:400px;
+width:auto;
 }
 
 #clock{
-font-size:72px;
+font-size:84px;
 font-weight:bold;
+line-height:1;
 }
 
 #date{
-font-size:24px;
-margin-top:5px;
+font-size:28px;
+margin-top:10px;
 }
 
 .location{
 text-align:right;
-font-size:16px;
 }
 
-.location h2{
-font-size:28px;
+.location h1{
+font-size:42px;
+}
+
+.location p{
+font-size:20px;
 }
 
 .grid{
@@ -69,22 +74,27 @@ padding:20px;
 
 .card h2{
 margin-bottom:15px;
-font-size:32px;
+font-size:34px;
 }
 
 .news-item{
-font-size:24px;
-padding:10px 0;
+font-size:26px;
+padding:12px 0;
 border-bottom:1px solid rgba(255,255,255,.2);
 }
 
 .weather-temp{
-font-size:72px;
+font-size:80px;
 font-weight:bold;
 }
 
 .weather-info{
-font-size:24px;
+font-size:28px;
+line-height:1.8;
+}
+
+.traffic{
+font-size:26px;
 line-height:1.8;
 }
 
@@ -92,12 +102,12 @@ line-height:1.8;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-margin-bottom:10px;
+margin-bottom:15px;
 }
 
 .radio-buttons button{
-padding:12px;
-font-size:20px;
+padding:14px;
+font-size:22px;
 border:none;
 border-radius:10px;
 background:#ff6d00;
@@ -106,33 +116,37 @@ cursor:pointer;
 }
 
 .radio-buttons button:hover{
-background:#ff8933;
+background:#ff8a33;
 }
 
 audio{
 width:100%;
-margin-top:10px;
+}
+
+.live{
+display:inline-block;
+background:#d62d20;
+padding:4px 10px;
+font-size:14px;
+font-weight:bold;
+border-radius:20px;
+margin-left:8px;
 }
 
 .footer{
 text-align:center;
-padding:20px;
+padding:10px;
 }
 
 .footer img{
-max-width:900px;
-width:75%;
-height:auto;
+max-height:60px;
+width:auto;
 }
 
-.live-indicator{
-display:inline-block;
-background:#d62d20;
-padding:4px 10px;
-border-radius:20px;
-font-size:14px;
-font-weight:bold;
-margin-left:10px;
+.status{
+margin-top:10px;
+font-size:18px;
+opacity:.85;
 }
 
 </style>
@@ -152,8 +166,8 @@ margin-left:10px;
 </div>
 
 <div class="location">
-<h2>🏠 GEMIVA OUD-ADE</h2>
-Samen maken we het verschil
+<h1>🏠 GEMIVA OUD-ADE</h1>
+<p>Samen maken we het verschil</p>
 </div>
 
 </header>
@@ -164,21 +178,14 @@ Samen maken we het verschil
 
 <div class="card">
 
-<h2>
-📰 Nieuws
-<span class="live-indicator">LIVE</span>
-</h2>
+<h2>📰 Nieuws <span class="live">LIVE</span></h2>
 
 <div id="news">
+
 <div class="news-item">
-Welkom op het Gemiva Oud-Ade Dashboard
+Welkom bij het Gemiva Oud-Ade dashboard
 </div>
-<div class="news-item">
-Nieuwsfeed wordt geladen...
-</div>
-<div class="news-item">
-Controleer belangrijke actualiteiten voor vertrek
-</div>
+
 </div>
 
 </div>
@@ -189,7 +196,7 @@ Controleer belangrijke actualiteiten voor vertrek
 
 <h2>🚗 Verkeer & Reizen</h2>
 
-<div style="font-size:24px;line-height:1.8;">
+<div class="traffic">
 
 ✅ A4 richting Den Haag
 
@@ -219,9 +226,7 @@ Controleer belangrijke actualiteiten voor vertrek
 
 <br><br>
 
-📍 Controleer voor vertrek:
-<br>
-ANWB Verkeer of Google Maps
+📍 Controleer voor vertrek altijd Google Maps of ANWB.
 
 </div>
 
@@ -277,9 +282,9 @@ Qmusic
 
 <audio id="player" controls></audio>
 
-<p style="margin-top:10px;">
-🎵 Radio via browser
-</p>
+<div class="status">
+🎵 Gemiva Oud-Ade radiohoek
+</div>
 
 </div>
 
@@ -315,24 +320,24 @@ updateClock();
 
 function radio(url){
 
-const player =
+let p =
 document.getElementById("player");
 
-player.src = url;
+p.src = url;
 
-player.play();
+p.play();
 
 }
 
-radio('https://icecast.omroep.nl/radio2-bb-mp3');
+radio("https://icecast.omroep.nl/radio2-bb-mp3");
 
 const headlines = [
 
-"Controleer verkeer voor vertrek naar Leiden of Den Haag",
-
 "Welkom bij Gemiva Oud-Ade",
 
-"Controleer agenda en rapportages bij dienststart",
+"Controleer overdrachten bij dienststart",
+
+"Controleer verkeer voor vertrek",
 
 "Radio en dashboard actief",
 
@@ -340,22 +345,22 @@ const headlines = [
 
 ];
 
-let index = 0;
+let i = 0;
 
 setInterval(() => {
 
 document.getElementById("news").innerHTML =
 '<div class="news-item">' +
-headlines[index] +
+headlines[i] +
 '</div>';
 
-index++;
+i++;
 
-if(index >= headlines.length){
-index = 0;
+if(i >= headlines.length){
+i = 0;
 }
 
-},5000);
+},6000);
 
 fetch("https://wttr.in/Oud-Ade?format=j1")
 .then(r => r.json())
@@ -370,9 +375,11 @@ data.current_condition[0].weatherDesc[0].value;
 document.getElementById("weather").innerHTML =
 '<div class="weather-temp">' +
 temp +
-'°C</div><div class="weather-info">' +
+'°C</div>' +
+'<div class="weather-info">' +
 desc +
-'<br>Locatie: Oud-Ade</div>';
+'<br>Locatie: Oud-Ade' +
+'</div>';
 
 })
 .catch(() => {
